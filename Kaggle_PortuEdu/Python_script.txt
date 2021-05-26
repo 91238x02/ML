@@ -1,0 +1,151 @@
+#import module  
+import mysql.connector  
+import pandas as  pd  
+import matplotlib.pyplot as plt  
+
+#MariaDB ---> Linux_Python  
+config = {  
+    "user": "root",  
+    "password": "1234",  
+    "host": "192.168.56.101", #local  
+    "database": "orcl", #Database name  
+    "port": "3456" #default port:3306  
+}  
+conn = mysql.connector.connect(**config)    #connect code  
+cursor = conn.cursor()    #db select, insert, update, delete OBJECT  
+
+#SQL script  
+sql1 = """  
+select Pstatus, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu  
+  group by Pstatus;  
+""" # cast(A as double) ---> **transform datatype decimal to double  
+
+sql2 = """  
+select sex, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu  
+  group by sex;  
+"""  
+
+sql3 = """  
+select failures, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu  
+  group by failures;  
+"""  
+
+sql4 = """  
+select G1+G2+G3, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu  
+  group by G1+G2+G3;  
+"""  
+
+sql5="""  
+select age, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu  
+  group by age;  
+"""  
+
+sql6="""  
+select famrel, cast( truncate(avg(Dalc+Walc)/2*100, 0) as double) as res  
+  from port_stu group by famrel;  
+"""  
+
+#cursor select / processing  
+cursor.execute(sql1)    #exe sql script into cursor(memory)  
+resultList1 = cursor.fetchall()    #tuple list  
+cursor.execute(sql2)  
+resultList2 = cursor.fetchall()   
+cursor.execute(sql3)     
+resultList3 = cursor.fetchall()    
+cursor.execute(sql4)    
+resultList4 = cursor.fetchall()    
+cursor.execute(sql5)    
+resultList5 = cursor.fetchall()  
+cursor.execute(sql6)    
+resultList6 = cursor.fetchall()  
+
+
+#Pandas  
+df1 = pd.DataFrame(resultList1)    #transform resultList into Pandas  
+df2 = pd.DataFrame(resultList2)    
+df3 = pd.DataFrame(resultList3)    #df=df.astype(float) ↓↓↓  
+df4 = pd.DataFrame(resultList4)    #transform datatype to float(err_sol)  
+df5 = pd.DataFrame(resultList5)      
+df6 = pd.DataFrame(resultList6)                                         
+
+#matplotlib  
+plt.subplot(231)    #nrows,ncols,index(Z_shape)  
+plt.bar(df1[0],df1[1],color='red',width=0.6)  
+plt.xlabel('famrel\n')  
+plt.ylabel('Alcohol')  
+plt.yticks(range(0,301,100))  
+x=list(df1[0])  
+y=list(df1[1])  
+for i, v in enumerate(x):  
+    plt.text(v, y[i], y[i],     #좌표 (x축 = v, y축 = y[0]..y[1], 표시 = y[0]..y[1])                 
+             fontsize = 10,  
+             color='black',  
+             horizontalalignment='center',    #horizontalalignment (left, center, right)  
+             verticalalignment='bottom')    #verticalalignment (top, center, bottom)  
+      
+plt.subplot(232)  
+plt.bar(df2[0],df2[1],color='blue')  
+plt.title('#Variances influencing to Alcohol \n')  
+plt.xlabel('Sex\n')  
+plt.ylabel('Alcohol')  
+plt.yticks(range(0,301,100))  
+x=list(df2[0])  
+y=list(df2[1])  
+for i, v in enumerate(x):  
+    plt.text(v, y[i], y[i],                   
+             fontsize = 10,   
+             color='black',  
+             horizontalalignment='center',  
+             verticalalignment='bottom')  
+
+plt.subplot(233)  
+plt.barh(df3[0],df3[1],color='slategray')  
+plt.ylabel('Failures\n')  
+plt.xlabel('Alcohol')  
+plt.yticks(range(0,4,1))  
+plt.xticks(range(0,301,100))  
+
+plt.subplot(234)  
+plt.scatter(df4[0],df4[1],color='teal',s=10)  
+plt.xlabel('Grades per year\n')  
+plt.ylabel('Alcohol')  
+plt.xticks(range(0,61,10))  
+plt.yticks(range(0,501,100))  
+
+plt.subplot(235)  
+plt.plot(df5[0],df5[1],color='pink')  
+plt.grid()  
+plt.xlabel('age\n')  
+plt.ylabel('Alcohol')  
+plt.xticks(range(15,23,2))  
+plt.yticks(range(0,501,100))  
+
+
+plt.subplot(236)  
+plt.bar(df6[0],df6[1],color='#FF8200')  
+plt.xlabel('Family relationship\n')  
+plt.ylabel('Alcohol')  
+plt.xticks(range(1,6,1))  
+plt.yticks(range(0,301,100))  
+x=list(df6[0])  
+y=list(df6[1])  
+for i, v in enumerate(x):  
+    plt.text(v, y[i], y[i],                   
+             fontsize = 6,   
+             color='black',  
+             horizontalalignment='center', 
+             verticalalignment='bottom')      
+
+
+plt.tight_layout()  
+plt.show()  
+
+
+#index : graph options  
+#https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html  
+#https://matplotlib.org/3.1.1/tutorials/introductory/sample_plots.html  
