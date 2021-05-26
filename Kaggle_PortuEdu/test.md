@@ -10,8 +10,8 @@
 <br><br>
 
 ## 2.2 Summary
-Student Alcohol Consumption  
-Social, gender and study data from secondary school students  
+- Student Alcohol Consumption  
+- Social, gender and study data from secondary school students  
 (395 rows, 33 columns)  
 <br><br>
 
@@ -20,14 +20,14 @@ Porto, Portugal / April, 2008 / secondary school
 <br><br>
 
 ## 2.4 Development envirnment
-CentOS Linux7 (Virtual machine)  
-Python 3.8.5 (mysql-connector-python-rf 2.2.2)  
-MariaDB  
+- CentOS Linux7 (Virtual machine)  
+- Python 3.8.5 (mysql-connector-python-rf 2.2.2)  
+- MariaDB  
 <br><br>
 
 ## 2.5 Pre-processing
-delete column name (first line delete)  
-pick columns for analysis
+- Delete column name (first line delete)  
+- Pick columns for analysis
 <br><br>
 
 ## 2.6 Column list used 
@@ -283,7 +283,8 @@ plt.show()
 독립변수 : famrel(부모거주여부), sex(성별), failures(수업낙제횟수), grade(G1+G2+G3 : 연간성적), age(15~22), famrel(가족관계)  
 종속변수 : Alcohol( (Dalc+Walc)/2*100 : 1주간 알코올 섭취정도 )   
 이 변수들 중 grade 는 0~60 (60점이 고득점), Alcohol 은 0~500 (100:매우낮음, 500:매우높음) 으로 가공하여 사용하였다.  
-나머지 변수들은 위의 2.6 을 참고하여 그래프를 해석할 수 있다.  
+나머지 변수들은 위의 2.6 을 참고하여 그래프를 해석할 수 있다.
+ 
   
 fermer 변수를 보면 A:apart 는 191, T:together 는 188 로 매우 근소한 차이를 보이고 있다.   
 즉, 부모의 거주결합상태는 학생들의 음주에 큰 영향을 미치지 않는 것으로 판단할 수 있다.  
