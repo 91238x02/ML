@@ -278,7 +278,7 @@ plt.show()
 <img src="https://t1.daumcdn.net/cafeattach/zchT/2ff11fd94b279354c6d2412fb58abaed9a2415cb" height="400px" width="650px">  
 <br><br><br><br>
 
-# 5. explain result : conculusion
+# 5. onculusion
 학생들의 음주에 미치는 영향을 조사하기 위해 6가지의 변수 후보들을 선정하였다.  
 독립변수 : famrel(부모거주여부), sex(성별), failures(수업낙제횟수), grade(G1+G2+G3 : 연간성적), age(15-22), famrel(가족관계)  
 종속변수 : Alcohol( (Dalc+Walc)/2*100 : 1주간 알코올 섭취정도 )   
