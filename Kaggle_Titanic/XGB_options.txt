@@ -1,0 +1,36 @@
+#Python wrapper XGB parameters
+
+##General parameter
+booster : gbtree(tree based model) | gbliner(linear model) ---> default : gbtree
+silent : default=0 (show print message) | silent=1 ---> do not print msg
+nthread : cpu의 실행 스레드 개수 조절, default : 모든 스레드 사용
+
+
+##Booster parameter
+learning_rate : default=0.1, range(0:1) 합습률, 통상 0.2:0.3 선호
+n_estimators : defualt=100, weak learner 의 개수
+min_child_weight : default=1, range(0:무한), 트리에서 가지 나눌때 최소데이터 weight 의 총합, 값이 작을수록 과적합 경향
+min_split_loss : default=0, range(0:무한), gamma로도 표현, 리포 노드 추가분할 리프 최소값, 값이 작을수록 과적합 경향
+max_depth : default=3, range(0:무한), 트리의 깊이 지정, 통상 3~10 사이로 지정, 값이 크면 과적합 경향
+subsample : default=1, range(0:1), weak learner가 학습에 사용하는 데이터의 샘플링 비율, 1에 근접할수록 과적합 경향
+colsample_bytree : default=1, range(0:1), 트리 생성에 필요한 feature을 임의로 샘플링, 피처가 많을때 과적합 조절용도
+reg_lamda : default=1, L2 Regularization 적용 값, 피처 개수가 많을때 사용 검토, 값이 클수록 과적합 감소 효과
+reg_alpha : default=0, L1 Regularization 적용 값, 피처 개수가 많을때 사용 검토, 값이 클수록 과적합 감소 효과
+scale_pos_weight : default=1, 불균형 데이터셋의 균형을 유지, 원리는??
+
+
+
+##Training task parameter
+objective :
+reg:linear : 회귀
+binary:logistic : 이진분류
+multi:softmax : 다중분류, 클래스 반환
+multi:softprob : 다중분류, 확률환
+#eval_metric :
+1)rmse : Root Mean Squared Error
+2)mae : mean absolute error
+3)logloss : Negative log-likelihood
+4)error : binary classification error rate
+5)merror : multiclass classification error rate
+6)mlogloss: Multiclass logloss
+7)auc: Area Under Curve
