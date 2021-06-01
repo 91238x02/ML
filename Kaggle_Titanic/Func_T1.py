@@ -25,6 +25,11 @@ transform_outlier : dataframe의 outlier를 상하 기준에 맞추어 상하기
 
 def drop_features(dataframe, c1="default", c2="default", c3="default", c4="default", c5="default",\
                   c6="default", c7="default", c8="default", c9="default", c10="default"):
+    
+    """
+    c1~c10 = Column names droppping
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     bin=[c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
@@ -40,6 +45,13 @@ def drop_features(dataframe, c1="default", c2="default", c3="default", c4="defau
 
 
 def column_group(dataframe, method="group_mean", c1="default", c2="default", c3="default"):
+    
+    """
+    c1 = grouping index
+    c2 = grouping object
+    c3 = Column name created
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     
@@ -56,6 +68,12 @@ def column_group(dataframe, method="group_mean", c1="default", c2="default", c3=
 
 def fillna_int(dataframe, method="mean", c1="default", c2="default", c3="default", c4="default", c5="default",\
                c6="default", c7="default", c8="default", c9="default", c10="default"):
+    
+    """
+    c1~c10 = Column names to 'fillna' work
+    method = mean, mode
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     bin=[c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
@@ -79,6 +97,13 @@ def fillna_int(dataframe, method="mean", c1="default", c2="default", c3="default
     
     
 def fillna_oto(dataframe, method="oto", c1="default", c2="default"):
+    
+    """
+    method = oto --> one to one
+    c1 = Column name to 'fillna' work
+    c2 = index column to 'fillna' work
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     
@@ -95,6 +120,12 @@ def fillna_oto(dataframe, method="oto", c1="default", c2="default"):
 
 def fillna_str(dataframe, method="mode", c1="default", c2="default", c3="default", c4="default", c5="default",\
                c6="default", c7="default", c8="default", c9="default", c10="default"):
+    
+    """
+    method = mode
+    c1~c10 = Column names to 'fillna' work
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     bin=[c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
@@ -111,6 +142,12 @@ def fillna_str(dataframe, method="mode", c1="default", c2="default", c3="default
 
 def fillna_str2(dataframe, value="User_Defined", c1="default", c2="default", c3="default", c4="default", c5="default",\
                 c6="default", c7="default", c8="default", c9="default", c10="default"):
+    
+    """
+    value = 'User_Defined' --> you can designate the word to 'fillna work'
+    c1~c10 = Column names to 'fillna' work
+    """
+    
     df=copy.deepcopy(dataframe)
     colnames = [i for i in df.columns]
     bin=[c1,c2,c3,c4,c5,c6,c7,c8,c9,c10]
@@ -122,6 +159,7 @@ def fillna_str2(dataframe, value="User_Defined", c1="default", c2="default", c3=
             else:
                 print("Operation failed with value %s : Check out your Dataframe or value" %i)
     return df
+
 
 
 
